@@ -1,9 +1,10 @@
-#!name=广告拦截&净化合集-魔改版, 260924
-#!desc=原始链接：https://github.com/fmz200/wool_scripts。魔改：1. 删除绝大多数 Script 规则防止 RCE；2. 白名单化 MITM 列表，只允许极少数域名下的通信使用 MITM 功能；3. 安全风险参考：[RULE] 修改 dns 解析；[URL Rewrite] 修改 https 请求，存在 CSRF 风险，仅仅 reject 无风险；[Body Rewrite] 修改 https 响应，由于只能够执行 jq，XSS风险较低；[Map Local] 替换请求为本地数据，需要验证本地数据；[Script] 远程代码执行，难以信任远程代码，尤其是多数代码采用了源代码混淆
+#!name=广告拦截&净化合集-魔改版, 261117
+#!desc=基于 fmz200/wool_scripts 的个人定制：保留 MITM 白名单与脚本触发范围。部分已审阅脚本固定到自有仓库提交；其余第三方脚本仍需审计。MITM 按主机解密，脚本路径匹配不构成解密边界；reject 仍可能影响业务。审计见 docs/whitelist-security-review.md。
 #!raw-url=https://github.com/kleeu/wool_scripts/raw/whitelist/Surge/module/blockAds.custom.module
 #!system=ios
-#!date=2026-09-24 00:00:00
-# 白名单范围同步来源：fmz200/wool_scripts@3ca7487b4e4b86d9af76e50df72c62eacfbb659e（上游模块日期 2026-09-10）
+#!date=2026-11-17 00:00:00
+# 上游同步来源：fmz200/wool_scripts@22db02f262145931b019c9e60f4e5a53edb85cea；沿用原有 25 项 MITM 白名单。
+# 上游新增 rnote.com 不纳入；保留个人脚本筛选与路径范围。
 # 保留原有 MITM 白名单；保留未定义模板参数所涉脚本及 gRPC 响应头的原有设置。
 
 # >>>>>>>>>>>>>>> 🟣 <<<<<<<<<<<<<<
@@ -1269,7 +1270,7 @@ https://support.you.163.com/appversync/check.do - reject
 ^https?:\/\/api\.wfdata\.club\/v\d\/yesfeng\/(infoCenterAd|yesList) - reject
 
 # > WIFI万能钥匙
-hostname - reject
+# 删除上游历史转换残留的无效规则：hostname - reject
 
 # > 无他相机
 ^https?:\/\/res-release\.wuta-cam\.com\/json\/ads_component_cache\.json - reject
@@ -4104,32 +4105,32 @@ bilibili.protobuf = type=http-response,pattern=^https:\/\/(?:grpc\.biliapi\.net|
 
 # >>>>>>>>>>>>>>> ✅ S ✅ <<<<<<<<<<<<<<
 # > 什么值得买
-什么值得买去广告 = type=http-response, pattern=^https?:\/\/haojia\.m\.smzdm\.com\/detail_modul\/user_related_modul\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
+什么值得买去广告 = type=http-response, pattern=^https?:\/\/haojia\.m\.smzdm\.com\/detail_modul\/user_related_modul\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
 
-什么值得买去广告 = type=http-response, pattern=^https?:\/\/haojia-api\.smzdm\.com\/ranking_list\/articles\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
+什么值得买去广告 = type=http-response, pattern=^https?:\/\/haojia-api\.smzdm\.com\/ranking_list\/articles\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
 
-什么值得买去广告 = type=http-response, pattern=^https?:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
+什么值得买去广告 = type=http-response, pattern=^https?:\/\/s-api\.smzdm\.com\/sou\/filter\/tags\/hot_tags\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
 
-什么值得买去广告 = type=http-response, pattern=^https?:\/\/s-api\.smzdm\.com\/sou\/list_v10\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
+什么值得买去广告 = type=http-response, pattern=^https?:\/\/s-api\.smzdm\.com\/sou\/list_v10\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
 
-什么值得买去广告 = type=http-response, pattern=^https?:\/\/user-api\.smzdm\.com\/vip\/creator_user_center, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
+什么值得买去广告 = type=http-response, pattern=^https?:\/\/user-api\.smzdm\.com\/vip\/creator_user_center, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/smzdm_ads.js, requires-body=true, timeout=60
 
-什么值得买去广告 = type=http-response, pattern=^https?:\/\/user-api\.smzdm\.com\/vip$, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+什么值得买去广告 = type=http-response, pattern=^https?:\/\/user-api\.smzdm\.com\/vip$, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
 # 感谢【怎么肥事】分享
-Smzdm = type=http-response, pattern=^https?:\/\/app-api\.smzdm\.com\/util\/loading, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/app-api\.smzdm\.com\/util\/loading, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
-Smzdm = type=http-response, pattern=^https?:\/\/app-api\.smzdm\.com\/util\/update, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/app-api\.smzdm\.com\/util\/update, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
-Smzdm = type=http-response, pattern=^https?:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/user-api\.smzdm\.com\/vip\/bottom_card_list, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
-Smzdm = type=http-response, pattern=^https?:\/\/haojia-api\.smzdm\.com\/home\/list, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/haojia-api\.smzdm\.com\/home\/list, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
-Smzdm = type=http-response, pattern=^https?:\/\/homepage-api\.smzdm\.com\/v3\/home, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/homepage-api\.smzdm\.com\/v3\/home, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
-Smzdm = type=http-response, pattern=^https?:\/\/article-api\.smzdm\.com\/publish\/get_bubble, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/article-api\.smzdm\.com\/publish\/get_bubble, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
-Smzdm = type=http-response, pattern=^https?:\/\/qianbao\.smzdm\.com\/v\d\/app\/home, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
+Smzdm = type=http-response, pattern=^https?:\/\/qianbao\.smzdm\.com\/v\d\/app\/home, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/smzdm/Smzdm.js, requires-body=true, timeout=60
 
 # >>>>>>>>>>>>>>> ✅ W ✅ <<<<<<<<<<<<<<
 # > 网易云音乐
@@ -4171,32 +4172,32 @@ NetEaseCloudMusic_foll = type=http-response, pattern=^https?:\/\/(ipv4|interface
 # >>>>>>>>>>>>>>> ✅ Z ✅ <<<<<<<<<<<<<<
 # > 知乎
 # 首页 - 悬浮图标、顶部横幅、开屏广告、关注页推荐、推荐信息流、热榜信息流、热榜直播、回答底部卡片、精简顶部标签
-知乎移除首页推广 = type=http-response, pattern=^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除首页推广 = type=http-response, pattern=^https:\/\/(?:api|page-info)\.zhihu\.com\/(?:answers|articles)\/v2\/\d+, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/commercial_api\/app_float_layer, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/(?:moments_v3|topstory\/hot-lists\/total|topstory\/recommend), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/(?:moments_v3|topstory\/hot-lists\/total|topstory\/recommend), script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎精简顶部标签 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/root\/tab, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎精简顶部标签 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/root\/tab, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/v2\/topstory\/hot-lists\/everyone-seeing\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除首页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/v2\/topstory\/hot-lists\/everyone-seeing\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
 # 会员页面 - 弹窗、悬浮动图
-知乎移除会员页面推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除会员页面推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/bazaar\/vip_tab\/header\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
 # 回答详情页 - 评论区顶部、下一个回答
-知乎移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/next-(?:bff|data|render), script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=), script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除回答详情页推广 = type=http-response, pattern=^https:\/\/api\.zhihu\.com\/questions\/\d+(?:\/answers|\/feeds|\?include=), script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎移除回答详情页推广 = type=http-response, pattern=^https:\/\/www\.zhihu\.com\/api\/v4\/(?:articles|answers)\/\d+\/recommendations?\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎移除回答详情页推广 = type=http-response, pattern=^https:\/\/www\.zhihu\.com\/api\/v4\/(?:articles|answers)\/\d+\/recommendations?\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
 # 其他 - 服务器推送配置
-知乎拦截服务器推送配置 = type=http-response, pattern=^https:\/\/appcloud2\.zhihu\.com\/v3\/config, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎拦截服务器推送配置 = type=http-response, pattern=^https:\/\/appcloud2\.zhihu\.com\/v3\/config, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
-知乎拦截服务器推送配置 = type=http-response, pattern=^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/config\/all\?, script-path=https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/zhihu/zhihu.js, requires-body=true
+知乎拦截服务器推送配置 = type=http-response, pattern=^https:\/\/m-cloud\.zhihu\.com\/api\/cloud\/config\/all\?, script-path=https://raw.githubusercontent.com/kleeu/wool_scripts/22db02f262145931b019c9e60f4e5a53edb85cea/Scripts/zhihu/zhihu.js, requires-body=true
 
 
 [MITM]
