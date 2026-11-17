@@ -5,14 +5,15 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partZ/iReader.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/ih2\.ireader\.com\/zyapi\/bookstore\/ad\/ reject-200
-^https?:\/\/ih2\.ireader\.com\/zyapi\/self\/screen\/ad reject-200
-^https?:\/\/ih2\.ireader\.com\/zycl\/api\/ad\/ reject-200
-^https?:\/\/book\.img\.ireader\.com\/group6\/M00 reject-img
+request if ${url} ~= /^https?:\/\/ih2\.ireader\.com\/zyapi\/bookstore\/ad\//i then reject(200)
+request if ${url} ~= /^https?:\/\/ih2\.ireader\.com\/zyapi\/self\/screen\/ad/i then reject(200)
+request if ${url} ~= /^https?:\/\/ih2\.ireader\.com\/zycl\/api\/ad\//i then reject(200)
+request if ${url} ~= /^https?:\/\/book\.img\.ireader\.com\/group6\/M00/i then reject_img(200)
 
 
 [MITM]

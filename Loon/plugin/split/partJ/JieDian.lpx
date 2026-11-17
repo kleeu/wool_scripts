@@ -5,12 +5,13 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partJ/JieDian.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # 微信小程序
-^https?:\/\/s\.jiediankeji\.com\/adv reject-dict
+request if ${url} ~= /^https?:\/\/s\.jiediankeji\.com\/adv/i then reject_dict(200)
 
 
 [MITM]

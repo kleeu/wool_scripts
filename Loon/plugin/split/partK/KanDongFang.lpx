@@ -5,15 +5,16 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partK/KanDongFang.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # 开屏广告 感谢【树先生】分享
-^https:\/\/bp-api\.bestv\.com\.cn\/cms\/api\/free\/open\/advertisingV2 reject-dict
+request if ${url} ~= /^https:\/\/bp-api\.bestv\.com\.cn\/cms\/api\/free\/open\/advertisingV2/i then reject_dict(200)
 # 开屏广告 感谢【Wish】分享
-^https:\/\/bp-api\.bestv\.cn\/cms\/api\/free\/open\/advertisingV2 response-body-json-jq '.dt = []'
-^https:\/\/bp-api\.bestv\.cn\/cms\/api\/c\/search\/hot\/v(2|4) response-body-json-jq '.dt.hot = [] | .dt.recommand = [] | .dt.bannerList = []'
+response if ${url} ~= /^https:\/\/bp-api\.bestv\.cn\/cms\/api\/free\/open\/advertisingV2/i then response.json.jq(".dt = []")
+response if ${url} ~= /^https:\/\/bp-api\.bestv\.cn\/cms\/api\/c\/search\/hot\/v(2|4)/i then response.json.jq(".dt.hot = [] | .dt.recommand = [] | .dt.bannerList = []")
 
 
 [MITM]

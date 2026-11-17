@@ -5,13 +5,14 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partR/RARBG.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # https://rarbgmirror.org/torrents.php
-^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/expla\d{0,4}\.js$ reject-200
-^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/showads\.js$ response-body-replace-regex true false
+request if ${url} ~= /^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/expla\d{0,4}\.js$/i then reject(200)
+response if ${url} ~= /^https?:\/\/dyncdn\.me\/static\/\d{0,2}\/js\/showads\.js$/i then response.body.replace(/true/, "false")
 
 
 [MITM]

@@ -5,12 +5,13 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partT/TencentSports.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/news\.ssp\.qq\.com\/app reject
-^https?:\/\/sports3\.gtimg\.com\/community\/20cf93884470434eaf38b2e77ab7796a\.png reject
+request if ${url} ~= /^https?:\/\/news\.ssp\.qq\.com\/app/i then reject(404)
+request if ${url} ~= /^https?:\/\/sports3\.gtimg\.com\/community\/20cf93884470434eaf38b2e77ab7796a\.png/i then reject(404)
 
 
 [MITM]

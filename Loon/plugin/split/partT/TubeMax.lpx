@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partT/TubeMax.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN-SUFFIX,adjust.com, REJECT
@@ -21,7 +22,7 @@ DOMAIN-SUFFIX,adcanvas.com, REJECT
 
 [Rewrite]
 # 感谢【可莉】分享
-^https?:\/\/.*\.i18n-pglstatp\.com\/obj\/ad-pattern-sg reject
+request if ${url} ~= /^https?:\/\/.*\.i18n-pglstatp\.com\/obj\/ad-pattern-sg/i then reject(404)
 
 
 [MITM]

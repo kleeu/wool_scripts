@@ -5,13 +5,14 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partU/UJing.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/api-marketing\.zhinengxiyifang\.cn\/api\/v2\/cloudcode\/wechat\/bid reject
-^https?:\/\/adsoss\.zhinengxiyifang\.cn\/ads reject
-^https?:\/\/ads\.zhinengxiyifang\.cn\/api\/v1\.1\/ads\/* reject-200
+request if ${url} ~= /^https?:\/\/api-marketing\.zhinengxiyifang\.cn\/api\/v2\/cloudcode\/wechat\/bid/i then reject(404)
+request if ${url} ~= /^https?:\/\/adsoss\.zhinengxiyifang\.cn\/ads/i then reject(404)
+request if ${url} ~= /^https?:\/\/ads\.zhinengxiyifang\.cn\/api\/v1\.1\/ads\/*/i then reject(200)
 
 
 [MITM]

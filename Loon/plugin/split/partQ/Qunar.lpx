@@ -5,14 +5,15 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partQ/Qunar.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/qde\.qunar\.com\/preload reject-200
+request if ${url} ~= /^https?:\/\/qde\.qunar\.com\/preload/i then reject(200)
 # 开屏广告
-^https?:\/\/homefront\.qunar\.com\/front\/splash\/ad reject-dict
-^https?:\/\/client\.qunar\.com\/pitcher-proxy\?qrt=p_splashAd reject
+request if ${url} ~= /^https?:\/\/homefront\.qunar\.com\/front\/splash\/ad/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/client\.qunar\.com\/pitcher-proxy\?qrt=p_splashAd/i then reject(404)
 
 
 [MITM]

@@ -5,16 +5,17 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partX/XiaoXiangSupermarket.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # 广告下发
-^https?:\/\/portal-portm\.meituan\.com\/horn_ios\/mergeRequest reject-dict
+request if ${url} ~= /^https?:\/\/portal-portm\.meituan\.com\/horn_ios\/mergeRequest/i then reject_dict(200)
 # 开屏广告
-^https?:\/\/mall\.meituan\.com\/api\/c\/homepage\/splash reject-dict
+request if ${url} ~= /^https?:\/\/mall\.meituan\.com\/api\/c\/homepage\/splash/i then reject_dict(200)
 # 首页领券悬浮红包
-^https?:\/\/mall\.meituan\.com\/api\/c\/homepage\/bubble\/operate\/info mock-response-body data-type=json data="{"code": 0}"
+response if ${url} ~= /^https?:\/\/mall\.meituan\.com\/api\/c\/homepage\/bubble\/operate\/info/i then response.body.mock("json", "{\"code\": 0}")
 
 
 [MITM]

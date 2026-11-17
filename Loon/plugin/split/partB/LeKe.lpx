@@ -5,14 +5,15 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partB/LeKe.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # 开屏广告
-^https?:\/\/lens\.leoao\.com\/lens\/conduct\/app\/rpc\/v2\/com\.lefit\.dubbo\.cms\.api\.front\.AppAdvertisingFrontService\/getAppAdvertisingNew reject-dict
-^https?:\/\/lens\.leoao\.com\/lens\/conduct\/app\/rpc\/v2\/com\.lefit\.dubbo\.cms\.api\.bff\.ClientFrontFacade\/queryHomeMiddleInfo reject-dict
-^https?:\/\/lens\.leoao\.com\/lens\/conduct\/app\/rpc\/v2\/com\.lefit\.dubbo\.cms\.api\.front\.AdvertiseConfigFrontService\/getAdvertiseConfigNew reject-dict
+request if ${url} ~= /^https?:\/\/lens\.leoao\.com\/lens\/conduct\/app\/rpc\/v2\/com\.lefit\.dubbo\.cms\.api\.front\.AppAdvertisingFrontService\/getAppAdvertisingNew/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/lens\.leoao\.com\/lens\/conduct\/app\/rpc\/v2\/com\.lefit\.dubbo\.cms\.api\.bff\.ClientFrontFacade\/queryHomeMiddleInfo/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/lens\.leoao\.com\/lens\/conduct\/app\/rpc\/v2\/com\.lefit\.dubbo\.cms\.api\.front\.AdvertiseConfigFrontService\/getAdvertiseConfigNew/i then reject_dict(200)
 
 
 [MITM]

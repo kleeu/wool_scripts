@@ -5,12 +5,13 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partZ/ZiRu.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/ztoread\.ziroom\.com\/foka-card-api\/popup\/v2\/get reject-dict
-^https?:\/\/ztoread\.ziroom\.com\/ymerApi\/v\d\/index\/open reject-dict
+request if ${url} ~= /^https?:\/\/ztoread\.ziroom\.com\/foka-card-api\/popup\/v2\/get/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/ztoread\.ziroom\.com\/ymerApi\/v\d\/index\/open/i then reject_dict(200)
 
 
 [MITM]

@@ -5,16 +5,17 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partD/Dida.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN-KEYWORD,image.bianxianmao.com, REJECT
 
 
 [Rewrite]
-^https?:\/\/img\.admobile\.top\/admobile-adRequest\/.*.(jpg|png) reject-200
-^https?:\/\/webcdn\.m\.qq\.com\/qiantu\/upload\/202[0-9]{5}\/.*.(jpg|png) reject-200
+request if ${url} ~= /^https?:\/\/img\.admobile\.top\/admobile-adRequest\/.*.(jpg|png)/i then reject(200)
+request if ${url} ~= /^https?:\/\/webcdn\.m\.qq\.com\/qiantu\/upload\/202[0-9]{5}\/.*.(jpg|png)/i then reject(200)
 
 
 [MITM]

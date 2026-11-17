@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partT/Talkatone.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN-SUFFIX,tappx.com, REJECT
@@ -46,8 +47,8 @@ DOMAIN-SUFFIX,smadex.com, REJECT
 
 
 [Rewrite]
-^https?:\/\/alt-r\.my\.com\/mobile reject-dict
-^https?:\/\/imgx\.jampp\.com\/imgsrv\/tn reject-img
+request if ${url} ~= /^https?:\/\/alt-r\.my\.com\/mobile/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/imgx\.jampp\.com\/imgsrv\/tn/i then reject_img(200)
 
 
 [MITM]

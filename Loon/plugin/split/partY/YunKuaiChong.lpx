@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partY/YunKuaiChong.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 # 微信小程序
@@ -16,9 +17,9 @@ DOMAIN, et.ykccn.com, REJECT
 
 [Rewrite]
 # 微信小程序
-^https:\/\/gw3\.ykccn\.com\/api\/omp\/mt\/enterpriseWeChatConfig\/app\/queryCityConfig reject-dict
-^https:\/\/gw3\.ykccn\.com\/api\/omp\/mt\/appAdvertising\/queryAdvertisingByParams reject-dict
-^https:\/\/gw3\.ykccn\.com\/api\/omp\/mt\/charge\/activity\/package\/newest reject-dict
+request if ${url} ~= /^https:\/\/gw3\.ykccn\.com\/api\/omp\/mt\/enterpriseWeChatConfig\/app\/queryCityConfig/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/gw3\.ykccn\.com\/api\/omp\/mt\/appAdvertising\/queryAdvertisingByParams/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/gw3\.ykccn\.com\/api\/omp\/mt\/charge\/activity\/package\/newest/i then reject_dict(200)
 
 
 [MITM]

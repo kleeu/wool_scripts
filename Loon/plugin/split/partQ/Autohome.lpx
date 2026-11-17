@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partQ/Autohome.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN-KEYWORD,adm3.autoimg.cn, REJECT
@@ -45,8 +46,8 @@ DOMAIN-SUFFIX, h.pcd.autohome.com.cn, REJECT
 
 
 [Rewrite]
-^https?:\/\/adproxy\.autohome\.com\.cn\/AdvertiseService\/ reject-img
-^https?:\/\/app2\.autoimg\.cn\/apppdfs\/ reject-img
+request if ${url} ~= /^https?:\/\/adproxy\.autohome\.com\.cn\/AdvertiseService\//i then reject_img(200)
+request if ${url} ~= /^https?:\/\/app2\.autoimg\.cn\/apppdfs\//i then reject_img(200)
 
 
 [MITM]

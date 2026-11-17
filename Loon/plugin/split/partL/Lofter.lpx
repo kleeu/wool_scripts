@@ -5,14 +5,15 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partL/Lofter.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # 开屏广告 感谢@林夕分享
-^https?:\/\/ad\.lofter.com\/v1\.1\/yitou\/madr reject-200
-^https?:\/\/images\.pinduoduo\.com\/marketing\_api reject-200
-^https?:\/\/lofter\.lf127\.net\/ad\-material reject-200
+request if ${url} ~= /^https?:\/\/ad\.lofter.com\/v1\.1\/yitou\/madr/i then reject(200)
+request if ${url} ~= /^https?:\/\/images\.pinduoduo\.com\/marketing\_api/i then reject(200)
+request if ${url} ~= /^https?:\/\/lofter\.lf127\.net\/ad\-material/i then reject(200)
 
 
 [MITM]

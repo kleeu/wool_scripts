@@ -5,12 +5,13 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partA/AcFun.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/aes\.acfun\.cn\/s\?adzones reject
-^https?:\/\/api-new\.app\.acfun\.cn\/rest\/app\/flash\/screen\/ reject
+request if ${url} ~= /^https?:\/\/aes\.acfun\.cn\/s\?adzones/i then reject(404)
+request if ${url} ~= /^https?:\/\/api-new\.app\.acfun\.cn\/rest\/app\/flash\/screen\//i then reject(404)
 
 
 [MITM]

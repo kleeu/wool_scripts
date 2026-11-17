@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partM/MeituXiuxiu.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN-SUFFIX, corp.meitu.com, REJECT
@@ -24,8 +25,8 @@ DOMAIN-SUFFIX, rabbit.meitustat.com, REJECT
 
 
 [Rewrite]
-^https?:\/\/mea\.meitudata\.com\/kaiping reject
-^https?:\/\/adui\.tg\.meitu\.com reject-dict
+request if ${url} ~= /^https?:\/\/mea\.meitudata\.com\/kaiping/i then reject(404)
+request if ${url} ~= /^https?:\/\/adui\.tg\.meitu\.com/i then reject_dict(200)
 
 
 [MITM]

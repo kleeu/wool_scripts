@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partF/VariFlight.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN, adv-adlog.variflight.com, REJECT
@@ -17,8 +18,8 @@ DOMAIN, app-ad.variflight.com, REJECT
 
 
 [Rewrite]
-^https?:\/\/app\.variflight\.com\/ad\/ reject
-^https?:\/\/app\.variflight\.com\/v\d\/advert\/ reject
+request if ${url} ~= /^https?:\/\/app\.variflight\.com\/ad\//i then reject(404)
+request if ${url} ~= /^https?:\/\/app\.variflight\.com\/v\d\/advert\//i then reject(404)
 
 
 [MITM]

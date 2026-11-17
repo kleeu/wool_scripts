@@ -5,18 +5,19 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partS/SamClub.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
 
+
 [Rewrite]
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/sams-user\/(window\/getGoUpPlus|screen_promotion\/get) reject
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/channel\/portal\/AdgroupData reject-dict
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/configuration\/personCenterEntrance\/query reject-dict
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/trade\/order\/getOftenBuyGoods reject-dict
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/goods-portal\/spu\/searchRecommendPool reject-dict
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/configuration\/appVersionUpdate\/getAppVersionUpdateInfo reject-dict
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/sams-user\/(window\/getGoUpPlus|screen_promotion\/get)/i then reject(404)
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/channel\/portal\/AdgroupData/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/configuration\/personCenterEntrance\/query/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/trade\/order\/getOftenBuyGoods/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/goods-portal\/spu\/searchRecommendPool/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v\d\/sams\/configuration\/appVersionUpdate\/getAppVersionUpdateInfo/i then reject_dict(200)
 # 屏蔽更新
-^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v1\/sams\/configuration\/portal\/beUpdate reject-dict
+request if ${url} ~= /^https?:\/\/api-sams\.walmartmobile\.cn\/api\/v1\/sams\/configuration\/portal\/beUpdate/i then reject_dict(200)
 
 
 [MITM]

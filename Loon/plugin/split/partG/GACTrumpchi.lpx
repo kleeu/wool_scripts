@@ -5,14 +5,15 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partG/GACTrumpchi.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rewrite]
 # 开屏广告 感谢【Charlie】分享
-^https?:\/\/gsp\.gacmotor\.com\/gateway\/webapi\/baseinfo\/advertise\/getAdvertiseByPositionCode\?positionCode=1 reject-dict
+request if ${url} ~= /^https?:\/\/gsp\.gacmotor\.com\/gateway\/webapi\/baseinfo\/advertise\/getAdvertiseByPositionCode\?positionCode=1/i then reject_dict(200)
 # 更新弹窗  感谢【企鹅】分享
-^https?:\/\/gsp\.gacmotor\.com\/gateway\/app-api\/app\/version\/latestupdate\?flatform=2&innerVersion= reject-dict
+request if ${url} ~= /^https?:\/\/gsp\.gacmotor\.com\/gateway\/app-api\/app\/version\/latestupdate\?flatform=2&innerVersion=/i then reject_dict(200)
 
 
 [MITM]

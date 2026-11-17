@@ -5,17 +5,18 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partX/XiaoAiSpeaker.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN, mistat.xiaomi.com, REJECT
 
 
 [Rewrite]
-^https?:\/\/(info\.mina\.xiaoaisound|marketing-aibox\.v\.mitvos)\.com\/advertise(?!\/banner) reject
-^https?:\/\/(info\.mina\.xiaoaisound|marketing-aibox\.v\.mitvos)\.com\/payGuide\/userCenter reject
-^https?:\/\/(info\.mina\.xiaoaisound|marketing-aibox\.v\.mitvos)\.com\/popup reject-dict
+request if ${url} ~= /^https?:\/\/(info\.mina\.xiaoaisound|marketing-aibox\.v\.mitvos)\.com\/advertise(?!\/banner)/i then reject(404)
+request if ${url} ~= /^https?:\/\/(info\.mina\.xiaoaisound|marketing-aibox\.v\.mitvos)\.com\/payGuide\/userCenter/i then reject(404)
+request if ${url} ~= /^https?:\/\/(info\.mina\.xiaoaisound|marketing-aibox\.v\.mitvos)\.com\/popup/i then reject_dict(200)
 
 
 [MITM]

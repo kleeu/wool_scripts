@@ -5,8 +5,9 @@
 #!icon=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/gif/naisi-01.gif
 #!raw-url=https://github.com/fmz200/wool_scripts/raw/main/Loon/plugin/split/partL/Lenovo.lpx
 #!tg-channel=https://t.me/inaisi
-#!date=
+#!date=2026-11-11 21:17:23
 #############################################
+
 
 [Rule]
 DOMAIN-SUFFIX, adapi.lenovogame.com, REJECT
@@ -29,7 +30,7 @@ DOMAIN-SUFFIX, yx.lenovomm.com, REJECT
 
 
 [Rewrite]
-^https?:\/\/api\.club\.lenovo\.cn\/common\/open_ad reject
+request if ${url} ~= /^https?:\/\/api\.club\.lenovo\.cn\/common\/open_ad/i then reject(404)
 
 
 [MITM]

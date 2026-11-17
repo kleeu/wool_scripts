@@ -5,7 +5,7 @@
  * 1. 递归读取 Surge/module/split 下的所有 .sgmodule 拆分文件
  * 2. 按照 blockAds.module 的既有规律重新聚合：
  *    - 文件头沿用当前 blockAds.module 的 #! 元数据，仅刷新 #!date（不存在时使用内置模板）
- *    - 段落固定顺序：Rule -> Header Rewrite -> URL Rewrite -> Body Rewrite -> Map Local -> Script -> MITM
+ *    - 段落固定顺序：General -> Rule -> Header Rewrite -> URL Rewrite -> Body Rewrite -> Map Local -> Script -> MITM
  *    - 段内按分类（part!!、part1..part5、partA..partZ）输出 ✅ X ✅ 标记，
  *      固定顺序：!!、1、2、3、5、A~Z；空分类也保留标记行
  *    - 每个 APP 输出 # > 显示名 + # hostname 注释 + 规则内容，同分类内按显示名排序
@@ -24,6 +24,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const { syncDb } = require('./syncDb.js');
 
 // 定位项目根目录（tools/splitRules/ 往上两级）
 const baseDir = process.env.WOOL_MERGE_BASE_DIR ? path.resolve(process.env.WOOL_MERGE_BASE_DIR) : path.resolve(__dirname, '../..');
@@ -31,8 +32,16 @@ const baseDir = process.env.WOOL_MERGE_BASE_DIR ? path.resolve(process.env.WOOL_
 const CONFIG = {
   inputDir: path.join(baseDir, 'Surge', 'module', 'split'),
   outputFile: path.join(baseDir, 'Surge', 'module', 'blockAds.module'),
-  // 段落固定顺序（拆分文件中出现的全部段落）
+  dbPath: path.join(baseDir, 'db', 'inaisi.db'),
+  repoRawBase: 'https://github.com/fmz200/wool_scripts/raw/main/Surge/module/split',
+  splitRelPath: 'Surge/module/split',
+  rawCol: 'surge_raw_url',
+  importCol: 'surge_import_url',
+  extraRawCol: 'egern_raw_url',
+  extraImportCol: 'egern_import_url',
+  // 段落固定顺序。[General] 必须在规则段落之前，未知段落仍追加在 MITM 之后。
   sectionOrder: [
+    'General',
     'Rule',
     'Header Rewrite',
     'URL Rewrite',
@@ -314,6 +323,20 @@ async function main() {
   console.log(`[INFO] 汇总 MITM hostname 数量（去重后）: ${allHosts.length}`);
   console.log(`[INFO] 输出文件: ${CONFIG.outputFile}（共 ${out.length} 行）`);
   console.log('[SUCCESS] 聚合完成！');
+  // 聚合完成后同步数据库：split 目录 -> rule_details 表
+  await syncDb({
+    inputDir: CONFIG.inputDir,
+    outputExt: '.sgmodule',
+    dbPath: CONFIG.dbPath,
+    rawCol: CONFIG.rawCol,
+    importCol: CONFIG.importCol,
+    extraRawCol: CONFIG.extraRawCol,
+    extraImportCol: CONFIG.extraImportCol,
+    repoRawBase: CONFIG.repoRawBase,
+    splitRelPath: CONFIG.splitRelPath,
+    buildImportUrl: (rawUrl) =>
+      `https://api.boxjs.app/surge/install-module?url=${encodeURIComponent(rawUrl)}`
+  });
 }
 
 // 执行主函数
